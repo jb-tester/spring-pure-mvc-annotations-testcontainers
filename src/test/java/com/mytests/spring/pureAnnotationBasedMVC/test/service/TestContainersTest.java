@@ -46,6 +46,11 @@ class TestContainersTest {
 @Autowired DataSource dataSource;
   @Autowired UserService userService;
 
+    @BeforeEach
+    void setUp() {
+        userService.deleteAll();
+        userService.populateDB();
+    }
 
   @Test
   void test() {
