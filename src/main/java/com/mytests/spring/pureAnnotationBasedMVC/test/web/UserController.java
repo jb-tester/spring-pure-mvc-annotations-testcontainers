@@ -4,10 +4,8 @@ import com.mytests.spring.pureAnnotationBasedMVC.test.service.UserService;
 import com.mytests.spring.pureAnnotationBasedMVC.test.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -17,6 +15,7 @@ public class UserController {
 
 
     private final UserService userService;
+    private int age=0;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -36,5 +35,25 @@ public class UserController {
         User user = new User(first_name, last_name, age);
         userService.save(user);
         return "redirect:users";
+    }
+
+    @GetMapping("/byAge")
+    public String getUsersByAge(Model model) {
+        List<User> usersByAge = userService.findByAge(age);
+        model.addAttribute("usersByAge", usersByAge);
+        model.addAttribute("age", age);
+        return "byAge";
+    }
+
+
+    @PostMapping(value = "/byAge")
+    public String addAge(@RequestParam("age") String age) {
+        try {
+            this.age = Integer.parseInt(age);
+        } catch (final NumberFormatException e) {
+            return "redirect:byAge";
+        }
+        
+        return "redirect:byAge";
     }
 }

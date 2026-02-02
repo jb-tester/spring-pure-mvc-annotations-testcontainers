@@ -45,4 +45,9 @@ public class UserService {
     public void deleteAll() {
         repository.deleteAll();
     }
+
+    public List<User> findByAge(int age) {
+        List<User> usersByAge = repository.findUsersByAgeGreaterThan(age);
+        return usersByAge;
+    }
 }

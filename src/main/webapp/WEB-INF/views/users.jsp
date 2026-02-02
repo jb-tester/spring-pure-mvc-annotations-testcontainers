@@ -8,8 +8,8 @@
 <body>
 <h1>Users</h1>
 <ul>
-    <c:forEach var="user" items="${users}">
-        <li>${user.first_name} ${user.last_name} (${user.age})</li>
+    <c:forEach var="u" items="${users}">
+        <li>${u.first_name} ${u.last_name} (${u.age})</li>
     </c:forEach>
 </ul>
 
@@ -23,5 +23,7 @@
     <input type="text" name="age" id="age">
     <button type="submit">Add User</button>
 </form>
+<br/>
+<a href="users/byAge">find users by age</a>
 </body>
 </html>

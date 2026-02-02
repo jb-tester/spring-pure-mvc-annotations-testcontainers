@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ContextConfiguration(classes = AppConfig.class)
@@ -29,6 +31,12 @@ class UserServiceTest {
     void findAllTest() {
         userService.findAll();
         assertEquals(3, userService.findAll().size());
+    }
+
+    @Test
+    void findByAgeTest() {
+        List<User> usersByAge = userService.findByAge(30);
+        assertEquals(1, usersByAge.size());
     }
 
     @Test
