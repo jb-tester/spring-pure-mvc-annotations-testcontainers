@@ -41,4 +41,8 @@ public class UserService {
         User user = repository.findById(id).orElse(null);
         return user;
     }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
 }
