@@ -1,5 +1,6 @@
 package com.mytests.spring.pureAnnotationBasedMVC.test.service;
 
+import com.mytests.spring.pureAnnotationBasedMVC.test.web.IndexController;
 import jakarta.servlet.ServletContext;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockServletContext;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -18,8 +18,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @SpringJUnitWebConfig(classes = TestWebConfig.class, resourcePath = "src/test/resources/static")
-class TestIndexController {
-    @Value("${prop1}")
+class TestIndexControllerAnnotations {
+    @Value("${prop1}") // not found
     String attrValue;
 
     @Autowired
@@ -41,12 +41,7 @@ class TestIndexController {
         ServletContext servletContext = wac.getServletContext();
         Assertions.assertNotNull(servletContext);
         Assertions.assertInstanceOf(MockServletContext.class, servletContext);
-        for (String beanName : wac.getBeanDefinitionNames()) {
-
-                System.out.println("Bean Name: " + beanName);
-                System.out.println("Bean " + wac.getBean(beanName));
-
-        }
+        Assertions.assertNotNull(wac.getBean(IndexController.class));
     }
 
     @Test
