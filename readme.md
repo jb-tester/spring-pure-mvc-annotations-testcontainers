@@ -1,10 +1,13 @@
-- context is recognized;
-- Structure - ok
-- Spring view - ok
-- if Spring facet is added manually, configuration is recognized
-- after adding Spring facet, the beans are duplicated in Spring view
+Without Spring facet:
+- OK: context is recognized;
+- OK: Structure view is available and shows correct contents;
+- OK: Spring view
+- BUG: no gutters for repository methods
+With facet:
+- OK: if Spring facet is added manually, fileset is recognized
+- BUG: after adding Spring facet, the beans are duplicated in Spring view
 Spring Debugger:
-- test - ok
-- application - not available
+- OK: tests running
+- BUG: application - not available
    
  
