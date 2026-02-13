@@ -13,13 +13,15 @@
     </c:forEach>
 </ul>
 
-<h2>Set the age</h2>
+<h2>Set the age range: users with age more than selected will be displayed</h2>
 <form action="./byAge" method="post">
     <label for="age">Age range:</label>
     <input type="text" name="age" id="age">
 
     <button type="submit">add age range</button>
 </form>
-
+<br/>
+<br/>
+<a href="${pageContext.request.contextPath}/updateUserAge">update users with invalid age</a>
 </body>
 </html>

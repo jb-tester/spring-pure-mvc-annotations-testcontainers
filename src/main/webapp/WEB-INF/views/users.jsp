@@ -4,6 +4,13 @@
 <html>
 <head>
     <title>User List</title>
+    <style type="text/css">
+        body {
+            font-style: italic;
+            color: brown;
+            background-color: ${background};
+        }
+    </style>
 </head>
 <body>
 <h1>Users</h1>
@@ -13,7 +20,7 @@
     </c:forEach>
 </ul>
 
-<h2>Add New User</h2>
+<h2 style="color: ${color}">Add New User</h2>
 <form action="users" method="post">
     <label for="first_name">First Name:</label>
     <input type="text" name="first_name" id="first_name">

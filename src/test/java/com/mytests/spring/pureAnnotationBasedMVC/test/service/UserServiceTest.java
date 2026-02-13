@@ -23,7 +23,6 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        userService.deleteAll();
         userService.populateDB();
     }
 
@@ -34,8 +33,8 @@ class UserServiceTest {
     }
 
     @Test
-    void findByAgeTest() {
-        List<User> usersByAge = userService.findByAge(30);
+    void findByAgeGraterThanTest() {
+        List<User> usersByAge = userService.findByAgeGraterThan(30);
         assertEquals(1, usersByAge.size());
     }
 

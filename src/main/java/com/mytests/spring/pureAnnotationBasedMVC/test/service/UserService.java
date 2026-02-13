@@ -20,9 +20,12 @@ public class UserService {
 
 
     public void populateDB() {
+        deleteAll();
         System.out.println("====== DB population  =====");
         repository.save(new User("ivan", "ivanov", 20));
         repository.save(new User("petr", "petrov", 30));
+        repository.save(new User("vasily", "vasechkin", 0));
+        repository.save(new User("pavel", "pavlov", -1));
         repository.save(new User("sidor", "sidorov", 40));
         System.out.println("===================");
     }
@@ -46,8 +49,18 @@ public class UserService {
         repository.deleteAll();
     }
 
-    public List<User> findByAge(int age) {
+    public List<User> findByAgeGraterThan(int age) {
         List<User> usersByAge = repository.findUsersByAgeGreaterThan(age);
         return usersByAge;
+    }
+    public void updateIncorrectAges(int age) {
+        List<User> invalidAgeUsers = this.findByAgeIsLessThanEqual(0);
+        if (!invalidAgeUsers.isEmpty()) {
+            repository.updateAgeWhereAgeIsLessOrEquals0(age);
+        }
+    }
+
+    public List<User> findByAgeIsLessThanEqual(int age) {
+        return repository.findByAgeIsLessThanEqual(age);
     }
 }

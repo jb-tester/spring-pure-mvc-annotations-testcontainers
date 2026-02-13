@@ -5,7 +5,6 @@ import com.mytests.spring.pureAnnotationBasedMVC.test.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -25,6 +24,8 @@ public class UserController {
     @GetMapping
     public String getUsers(Model model) {
         List<User> users = userService.findAll();
+        model.addAttribute("color", "darkgreen");
+        model.addAttribute("background", "bisque");
         model.addAttribute("users", users);
         return "users";
     }
@@ -39,7 +40,7 @@ public class UserController {
 
     @GetMapping("/byAge")
     public String getUsersByAge(Model model) {
-        List<User> usersByAge = userService.findByAge(age);
+        List<User> usersByAge = userService.findByAgeGraterThan(age);
         model.addAttribute("usersByAge", usersByAge);
         model.addAttribute("age", age);
         return "byAge";
